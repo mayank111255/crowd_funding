@@ -1,0 +1,104 @@
+<% content_for :title, 'User' %>
+<% content_for :javascript do %>
+  <% javascript_include_tag :image %>
+<% end %>
+
+<%= render partial: 'shared/errors', locals: { form: current_user } %>
+
+<div id="user_image">
+  <div id="profile_pic">
+    <%= image_tag @user.image.url(:medium) %>
+  </div>
+  
+  <%= form_for :user, url: update_image_user_url(current_user), html: { class: 'edit_profile_pic' } do |f| %>
+    <%= f.file_field :image, required: true %>
+    <%= submit_tag :Save %>
+    <%= link_to :cancel, 'javascript:', class: 'cancel btn btn-primary' %>
+  <% end %>
+
+  <% if current_user.id == @user.id %>
+    <%= form_tag 'javascript:', class: 'change inline' do %>
+      <%= submit_tag :change %>
+    <% end %>
+
+    <div class="inline edit_profile_links">
+      <%= link_to 'Edit Profile', edit_user_url(@user), method: :get, 'data-disable-with' => 'Processing..', class: 'btn btn-primary' %>
+      <%= link_to 'Reset Password', edit_passwords_url, method: :get, 'data-disable-with' => 'Processing..', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<div id="user_info">
+  <table class="table">
+    <tr>
+      <th><%= t(:name) %></th>
+      <td><%= @user.name.capitalize || 'NA' %></td>
+    </tr>
+    <tr>
+      <th><%= t(:email) %></th>
+      <td><%= @user.email || 'NA' %></td>
+    </tr>
+    <% if privileged? %>
+      <tr>
+        <th><%= t(:phone_no) %></th>
+        <td><%= @user.phone_no || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= t(:permanent_address) %></th>
+        <td><%= @user.permanent_address || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= t(:current_address) %></th>
+        <td><%= @user.current_address || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= t(:permanent_account_number) %></th>
+        <td><%= @user.permanent_account_number || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= "PAN_#{ t(:attachment) }" %></th>
+        <td><%= @user.get_attachment('PAN') || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= t(:current_address) + ' ' + t(:attachment) %></th>
+        <td><%= @user.get_attachment('current_address') || 'NA' %></td>
+      </tr>
+      <tr>
+        <th><%= t(:permanent_address) + ' ' + t(:attachment) %></th>
+        <td><%= @user.get_attachment('permanent_address') || 'NA' %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th><%= t(:projects) %></th>
+      <td>
+        <% if @user.projects.present? %>
+          <% @user.projects.each do |project| %>
+            <%= link_to project.title.humanize, project_url(project) %>
+            <br>
+          <% end %>
+        <% else %>
+          NA
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>
+<% if @user.contributions.present? %>
+  <div class="user_contributions">
+    <h2 align="center"> <%= t(:contribution) %> </h2>
+    <table class="table">
+      <tr>
+        <th><%= t(:project) %></th>
+        <th><%= t(:time_of_contribution) %></th>
+        <th><%= t(:amount) %></th>
+      </tr>
+        <% @user.contributions.each do |contribution| %>
+          <tr>
+            <td><%= link_to contribution.project.title.humanize, project_url(contribution.project) %></td>
+            <td><%= contribution.created_at.in_time_zone('Kolkata') %></td>
+            <td><%= contribution.amount %></td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
+<% end %>

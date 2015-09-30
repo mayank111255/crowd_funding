@@ -1,0 +1,26 @@
+<% content_for :title, 'Users' %>
+<% content_for :javascript do %>
+  <% javascript_include_tag 'index_page' %>
+<% end %>
+<% if @users %>
+  <div id='users'>
+    <table class="table">
+      <tr>
+        <th><%= t(:name) %></th>
+        <th><%= t(:email) %></th>
+        <th><%= t(:actions) %></th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to t(:show), user %>
+            <%= generate_change_user_state_link(user) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <% add_pagination(:page_users_url) %>
+<% end %>

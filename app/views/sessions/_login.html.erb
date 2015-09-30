@@ -1,0 +1,18 @@
+<h2 align="center"> Login Form </h2>
+<div class="notice" id="login_notice"></div>
+<div id="dialog">
+  <%= form_tag :sessions, class: 'inline_form', id: 'login_user' do %>
+    <div class="required">
+      <%= label_tag :email %><br>
+      <%= email_field_tag :email, params[:email], required: true %>
+    </div>
+    <div class="required">
+      <%= label_tag :password %><br>
+      <%= password_field_tag :password, params[:password], required: true %>
+    </div><br>
+    <%= submit_tag "Login", data: { 'disable-with': 'Processing..' } %>
+  <% end %>
+  <%= form_tag(:new_password, method: :get, class: "inline_form") do %>
+    <%= submit_tag "forgot password?", data: { 'disable-with': 'Processing..' } %>
+  <% end %>
+</div>

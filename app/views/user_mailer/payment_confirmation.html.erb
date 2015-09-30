@@ -1,0 +1,8 @@
+Hi <%= @user.name.capitalize %><br>
+
+Thank you for investment in project- <%= @project.title.titleize %><br>
+Please click on link below to download reciept of your payment.
+<%= download_receipt_transactions_url(@transaction.stripeToken) %>
+<br><br>
+
+Regards admin(Crowd Funding)

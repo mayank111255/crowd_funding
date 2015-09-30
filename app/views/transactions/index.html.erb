@@ -1,0 +1,23 @@
+<div id="transactions">
+  <h2 align="center">Transactions</h2>
+  <table class="table">
+    <tr>
+      <th><%= t(:email) %></th>
+      <th><%= t(:amount) %></th>
+      <th><%= t(:payment_mode) %></th>
+      <th><%= t(:created_at) %></th>
+      <th><%= t(:transaction_id) %></th>
+      <th><%= t(:status) %></th>
+    </tr>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.stripeEmail %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.mode %></td>
+        <td><%= transaction.created_at %></td>
+        <td><%= transaction.stripeToken %></td>
+        <td><%= transaction.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

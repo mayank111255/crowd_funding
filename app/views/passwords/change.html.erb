@@ -1,0 +1,15 @@
+<%= render partial: 'shared/errors', locals: { form: current_user } %>
+<% content_for(:title, 'Change Password') %>
+<div class="change_password">
+  <h2><%= t(:change_password) %></h2>
+  <%= form_for(:user, url: password_path(id: current_user.id), method: 'patch') do |f| %>
+    <table class="table">
+      <tr class="required">
+        <th><%= f.label(:current_password, t(:current_password)) %></th>
+        <td><%= f.password_field(:current_password, required: true) %></td>
+      </tr>
+      <%= render partial: 'edit', locals: { f: f } %>
+    </table>
+    <%= f.submit(t(:change_password), 'data-disable-with' => 'Processing..') %>
+  <% end %>
+</div>

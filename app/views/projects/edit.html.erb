@@ -1,0 +1,6 @@
+<% content_for :title, 'Edit Project' %>
+<%= render partial: 'shared/errors', locals: { form: @project } %>
+<%= form_for @project, method: :patch do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= f.submit t(:update_project), 'data-disable_with' => 'Updating..' %>
+<% end %>

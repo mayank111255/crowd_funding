@@ -1,0 +1,12 @@
+<form action="<%= create_transaction_for_project_url(@project) %>" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_WMS4wmBseIAKxD1CjAYHcWub"
+    data-amount="<%= session[:amount]*100 %>"
+    data-name="Crowd Funding"
+    data-description="2 widgets ($20.00)"
+    data-image="">
+  </script>
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <%= hidden_field_tag :mode, 'credit card' %>
+</form>

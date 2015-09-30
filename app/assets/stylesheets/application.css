@@ -1,0 +1,136 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap.min
+ *= require jquery.bxslider.css
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.notice {
+  color: #000 !important;
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+  text-align: center;
+}
+
+.inline_form, .button_to, .inline {
+	display: inline;
+}
+
+#errors {
+  border: 2px;
+  border-color: #f0f00f;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  color: red;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+.table .required input, #user_profile_attributes_permanent_address {
+  width: 235px;
+}
+
+#dialog {
+  margin: 12px;
+}
+
+.required label:after {
+  content: '*';
+  color: red;
+}
+
+.row {
+  width: 85%;
+  margin: 0px auto;
+}
+
+.col-md-2 {
+  width: 25%;
+}
+
+.button {
+  width: 200px;
+  margin: 0px auto;
+}
+
+.see_all .btn {
+  width: 100%;
+}
+
+#user_name_on_navigation_bar {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.caption {
+  text-align: center;
+}
+
+#comment {
+  width: 500px;
+}
+
+.see_all {
+  width: 15%;
+  margin: 0px auto;
+}
+
+#invested_amount {
+  width: 240px;
+}
+
+#filter {
+  margin-right: 40px;
+}
+
+#profile_pic {
+  border: 1px solid black;
+  width: 153px;
+}
+
+.edit_profile_pic {
+  display: none;
+}
+
+.edit_profile_links {
+  float: right;
+}
+
+.bx-wrapper {
+  width: 360px;
+}
+
+.filter {
+  width: 400px;
+  margin: 0px auto;
+}

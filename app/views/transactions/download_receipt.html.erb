@@ -1,0 +1,10 @@
+<%= t(:crowd_funding) %>
+
+<%= t(:your_payment_details) %> -
+
+<%= t(:transaction_id) %> : <%= @transaction.id %>
+<%= t(:user) %> :
+  <%= t(:name) %> : <%= @transaction.user.name.capitalize %>
+  <%= t(:email) %> : <%= @transaction.user.email %>
+<%= t(:project) %> : <%= @transaction.project.title %>
+<%= t(:investment) %> : $<%= @transaction.amount %>

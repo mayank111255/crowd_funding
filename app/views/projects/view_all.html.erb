@@ -1,0 +1,24 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag :filter %>
+<% end %>
+<% unless params[:offset] || params[:filter] %>
+  <div class="filter">
+    <%= t(:filter) %>: <%= select_tag :filter, options_for_select(Project::TYPES), href: catagory_projects_url(params[:catagory]) %>
+    <%= t(:sort_by) %>: <%= select_tag :sort_by, options_for_select(["Popularity", "Recent", "Ending at"]), href: catagory_projects_url(params[:catagory]) %>
+  </div>
+  <br>
+  <div id="projects">
+<% end %>
+  <% if @projects.present? %>
+    <% @projects.each_slice(4) do |collection| %>
+      <%= render partial: 'row', locals: { collection: collection } %>
+    <% end %>
+    <div class="see_all">
+      <%= add_load_more_button %>
+    </div>
+  <% else %>
+    <div class="notice">
+      <p><%= t(:thats_all_folks) %></p>
+    </div>
+  <% end %>
+</div>

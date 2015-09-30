@@ -1,0 +1,24 @@
+<% if @contributions.present? %>
+  <table class="table">
+    <tr>
+      <th><%= t(:project) %></th>
+      <th><%= t(:amount) %></th>
+      <th><%= t(:invested_on) %> (Date&Time)</th>
+    </tr>
+    <% @contributions.each do |contribution| %>
+      <tr>
+        <td>
+          <%= link_to contribution.project.title, project_url(contribution.project) %>
+        </td>
+        <td>
+          <%= contribution.amount %>
+        </td>
+        <td>
+          <%= contribution.created_at.in_time_zone('Kolkata') %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div class='notice'><p><%= t(:not_contributed) %></p></div>
+<% end %>

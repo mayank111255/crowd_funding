@@ -1,0 +1,57 @@
+  
+<div class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><b><%= t(:crowd_funding).upcase %></b></a>
+    </div>
+    <div class="modal fade bs-example-modal-lg" id="login_form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div id="login_container">
+            <%= (render 'sessions/login') unless current_user %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" id="signup_form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div id="signup_container">
+            <%= (render 'users/signup') unless current_user %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% unless current_page?(root_url) %>
+          <li><%=link_to t(:home), root_path, id: 'home_anchor' %></li>
+        <% end %>
+        <% if current_user %>
+          <li><%= (link_to t(:users), users_path, 'data-disable-with' => 'Users', id: 'users_anchor') if admin? %></li>
+          <li><%= link_to t(:account), user_path(current_user), 'data-disable-with' => 'Account', id: 'account_anchor' %></li>
+          <li><%= link_to t(:project), projects_path, 'data-disable-with' => 'Project' %></li>
+          <li><%= link_to t(:transactions), :transactions if admin? %></li>
+          <li><%= link_to t(:contribution), contribution_user_path(current_user), 'data-disable-with' => 'Contributions...' %></li>
+          <li><%= link_to t(:logout), session_path(current_user), method: :delete, 'data-disable-with' => 'Processing..' %></li>
+        <% else %>
+          <li>
+            <a id="signup_anchor" data-toggle="modal" data-target=".bs-example-modal-sm" href='#'><%= t(:signup) %></a>
+          </li>
+          <li>
+            <a id="login_anchor" data-toggle="modal" data-target=".bs-example-modal-sm" href='#' ><%= t(:login) %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

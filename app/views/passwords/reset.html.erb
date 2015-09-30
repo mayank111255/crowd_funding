@@ -1,0 +1,11 @@
+<%= render partial: 'shared/errors', locals: { form: current_user } %>
+<% content_for(:title, 'Reset Password') %>
+<div class="reset_password">
+  <h2><%= t(:reset_password) %></h2>
+  <%= form_for(:user, url: password_path(id: @user.id, token: @user.reset_password_token), method: 'patch') do |f| %>
+    <table class="table">
+      <%= render partial: 'edit', locals: { f: f } %>
+    </table>
+    <%= f.submit(t(:reset), 'data-disable-with' => 'Processing..') %>
+  <% end %>
+</div>

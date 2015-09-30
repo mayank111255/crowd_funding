@@ -1,0 +1,47 @@
+<% content_for :title, t(:edit_profile) %>
+<%= form_for current_user do |f| %>
+<%= content_for :javascript do %>
+  <%= javascript_include_tag 'edit_profile' %>
+<% end %>
+<%= render partial: 'shared/errors', locals: { form: current_user } %>
+  <table class="table">
+    <tr class="required">
+      <td><%= f.label :name, t(:name) %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <%= f.fields_for :profile_attributes, current_user.profile do |profile| %>
+      <tr class="required">
+        <td><%= profile.label :phone_no, t(:phone_no) %></td>
+        <td><%= profile.telephone_field(:phone_no, required: true) %></td>
+      </tr>
+      <tr class="required">
+        <td><%= profile.label :current_address, t(:current_address) %></td>
+        <td><%= profile.text_field(:current_address, required: true) %></td>
+      </tr>
+      <tr>
+        <td class="required"><%= profile.label :permanent_address, t(:permanent_address) %></td>
+        <td>
+          <%= profile.text_field(:permanent_address, required: true) %>
+          <%= check_box_tag(:same_as_current) %>
+          <%= label_tag(:same_as_current, t(:same_as_current)) %>
+        </td>
+      </tr>
+      <tr class="required">
+        <td><%= profile.label(:permanent_account_number, 'PAN') %></td>
+        <td><%= profile.text_field :permanent_account_number, required: true %></td>
+      </tr>
+    <% end %>
+    <%= f.fields_for :documents do |document_form| %>
+      <tr>
+        <td>
+          <%= document_form.label :attachment, "#{ document_form.object.attachable_subtype.titleize }" + ' ' + t(:attachment) %>
+        </td>
+        <td>
+          <%= document_form.file_field(:attachment) %>
+          <%= document_form.hidden_field :attachable_subtype, value: document_form.object.attachable_subtype %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit t(:save_changes), 'data-disable-with' => 'Saving..' %>
+<% end %>

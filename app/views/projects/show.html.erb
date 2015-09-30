@@ -1,0 +1,128 @@
+<% content_for :title, t(:project) %>
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'index_page', 'comment', 'slider', 'payment', 'image' %>
+<% end %>
+
+<div id="project_details">
+
+  <div class="modal fade bs-example-modal-lg" id="guest_form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div id="guest_container">
+          <%= (render 'sessions/guest_form') unless current_user %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if user_authorized_for_edit? %>
+    <div class="notice">
+      <p>"Your project is pending for approval. 
+        Once it is approved then it will be visible to users"</p>
+    </div>
+  <% end %>
+  
+  <div id="project_images">
+    <ul class="bxslider">
+      <% @project.images.each do |image| %>
+        <li class='project_image' id="<%= image.id %>">
+          <%= image_tag image.attachment.url(:slider), large: image.attachment.url(:large) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="details">
+    <table class="table">
+    <tr>
+      <th><%= t(:type) %></th>
+      <td><%= @project.kind %></td>
+    </tr>
+      <tr>
+        <th><%= t(:title) %></th>
+        <td><%= @project.title %></td>
+      </tr>
+      <tr>
+        <th><%= t(:description) %></th>
+        <td><%= @project.description %></td>
+      </tr>
+      <tr>
+        <th><%= t(:video_link) %></th>
+        <td><%= @project.video_link %></td>
+      </tr>
+      <tr>
+        <th><%= t(:total_amount) %></th>
+        <td><%= @project.total_amount %></td>
+      </tr>
+      <tr>
+        <th><%= t(:percentage_completed) %></th>
+        <td><%= @project.percentage_completed %>%</td>
+      </tr>
+      <tr>
+        <th><%= t(:user_minimum_contribution) %></th>
+        <td><%= @project.user_minimum_contribution %></td>
+      </tr>
+      <% if admin? %>
+        <tr>
+          <th><%= t(:documents) %></th>
+          <td>
+            <% @project.documents.each do |doc| %>
+              <%= doc.attachment_file_name %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <%= add_link_to_publish(@project) %>
+  <br><br>
+  <% add_edit_button %>
+  <% add_donation_fields %>
+
+</div>
+
+<br><br>
+
+<% if admin? && @project.transactions.present? %>
+  <div id="contributors">
+    <h2 align="center"><%= t(:contributors) %></h2>
+    <table class="table">
+      <tr>
+        <th><%= t(:name) %></th>
+        <th><%= t(:email) %></th>
+        <th><%= t(:contribution_amount) %></th>
+        <th><%= t(:time_of_contribution) %></th>
+      </tr>
+      <% @project.transactions.each do |contribution| %>
+        <tr>
+          <td><%= link_to contribution.user.name.humanize, user_url(contribution.user) %></td>
+          <td><%= contribution.user.email %></td>
+          <td><%= contribution.amount %></td>
+          <td><%= contribution.created_at.in_time_zone('Kolkata') %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<br><br>
+<div id="comments">
+  <H2 align="center"><%= t(:comments) %></H2>
+  <br>
+  
+  <% if current_user %>
+    <% @project.comments.each do |comment| %>
+      <div class="comment">
+        <%= "#{ comment.name || comment.user.name }  - ".capitalize %>
+        <%= comment.description %>
+        <%= insert_delete_image(comment) %><br>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <form>
+    <%= text_field_tag :comment, "", { placeholder: 'enter comment here', url: comments_url, project_id: @project.id } %>
+  </form>
+
+</div>

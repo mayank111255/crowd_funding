@@ -1,0 +1,19 @@
+<h3 align="center">Guest User</h3>
+<div id="dialog">
+  <%= form_tag 'javascript:', class: 'inline_form', id: 'guest_user' do %>
+    <div class="required">
+      <%= label_tag :name %><br>
+      <%= text_field_tag :name, nil, { required: true } %>
+    </div>
+    <div class="required">
+      <%= label_tag :email %><br>
+      <%= email_field_tag :email, nil, { required: true } %>
+    </div>
+    <div class="required">
+      <%= label_tag :guest_comment, "Comment" %><br>
+      <%= text_field_tag :guest_comment, nil, { required: true } %>
+    </div>
+    <%= submit_tag "Post Comment", data: { 'disable-with': 'Posting..' } %>
+  <% end %>
+  <%= link_to 'already an user?', 'javascript:', id: 'guest' %>
+</div>

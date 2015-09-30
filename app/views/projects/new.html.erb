@@ -1,0 +1,6 @@
+<% content_for :title, t(:new_project) %>
+<%= render partial: 'shared/errors', locals: { form: @project } %>
+<%= form_for @project, method: :put do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= f.submit t(:create_project), 'data-disable-with' => 'Processing..' %>
+<% end %>

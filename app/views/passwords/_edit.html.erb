@@ -1,0 +1,8 @@
+<tr class="required">
+  <th><%= f.label(:password, t(:new_password)) %></th>
+  <td><%= f.password_field(:password, required: true) %></td>
+</tr>
+<tr class="required">
+  <th><%= f.label(:password_confirmation, t(:confirm_password)) %></th>
+  <td><%= f.password_field(:password_confirmation, required: true) %></td>
+</tr>

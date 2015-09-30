@@ -1,0 +1,22 @@
+<div class="row">
+  <% collection.each do |project| %>
+    <% cache project do %>
+    	<div class="col-sm-6 col-md-2">
+        <div class="thumbnail">
+          <a href="<%= project_url(project) %>">
+            <img src="<%= project.images.first.attachment.url(:medium) %>">
+          </a>
+          <div class="caption">
+            <a href="<%= project_url(project) %>">
+              <b><%= truncate(project.title, length: 12) %></b>
+            </a>
+            <br>
+            <b><%= t(:amount) %>: </b><%= project.total_amount %>
+            <hr>
+            <%= project.percentage_completed %><%= t(:percentage_completed) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

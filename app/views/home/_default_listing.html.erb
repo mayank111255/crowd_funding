@@ -1,0 +1,10 @@
+<hr>
+<% projects.each_slice(4) do |collection|%>
+  <%= render partial: 'projects/row', locals: { collection: collection } %>
+<% end %>
+<% if projects.present? %>
+  <div class="see_all">
+    <%= link_to t(:see_all), url, 'data-disable-with' => 'Processing..', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<hr>

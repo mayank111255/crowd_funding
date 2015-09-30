@@ -1,0 +1,13 @@
+<% content_for(:title, 'Identification') %>
+<div class="identification">
+  <fieldset>
+    <legend><%= t(:identification) %></legend>
+    <%= form_for :user, url: :passwords do |f| %>
+      <div class="required inline_form">
+        <%= f.label(:email, t(:enter_email)) %>
+        <%= f.email_field(:email, required: true) %>
+      </div>
+      <%= f.submit(t(:send_confirmation_mail), 'data-disable-with' => 'Sending..') %>
+    <% end %>
+  </fieldset>
+</div>

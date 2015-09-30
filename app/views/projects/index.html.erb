@@ -1,0 +1,38 @@
+<% content_for :title, t(:projects) %>
+<% content_for :javascript do %>
+  <% javascript_include_tag 'index_page' %>
+<% end %>
+<div class="new_project" align="center">
+  <%= link_to t(:create_new_project), new_project_path %>
+</div>
+<br>
+<% if @projects.present? %>
+
+  <div id="projects">
+    <table class="table">
+      <tr>
+        <th><%= t(:title) %></th>
+        <th><%= t(:type) %></th>
+        <th><%= t(:total_amount) %></th>
+        <th><%= t(:end_date) %></th>
+        <th><%= t(:action) %></th>
+      </tr>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= project.kind %></td>
+          <td><%= project.total_amount %></td>
+          <td><%= project.end_date %></td>
+          <td>
+            <%= link_to 'show', project_path(project), class: 'btn btn-primary' %>
+            <%= add_link_to_publish(project) %>
+            <%= add_link_to_cancel(project) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <% if admin? %>
+    <% add_pagination(:page_projects_url) %>
+  <% end %>
+<% end %>

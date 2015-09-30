@@ -1,0 +1,5 @@
+<h3>Thank You for your investment in '<%= @project.title %>'.
+We have saved your contribution </h3>
+<br>
+<%= link_to t(:view_more_projects), :root, class: 'btn btn-primary'  %>&nbsp;&nbsp;
+<%= link_to t(:view_all_contributions), contribution_user_path(current_user), class: 'btn btn-primary' %>

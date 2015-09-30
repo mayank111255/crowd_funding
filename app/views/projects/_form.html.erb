@@ -1,0 +1,55 @@
+<%= content_for :javascript do %>
+  <%= javascript_include_tag 'project_form' %>
+<% end %>
+<table class="table">
+  <tr>
+    <td><%= f.label :project_kind, t(:project_kind) %></td>
+    <td><%= f.select(:kind, Project::TYPES) %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :title, t(:title) %></td>
+    <td><%= f.text_field :title, required: true %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :description, t(:description) %></td>
+    <td><%= f.text_area :description, cols: 27, rows: 3, required: true %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :end_date, t(:end_Date) %></td>
+    <td><%= f.date_field :end_date, required: true %></td>
+  </tr>
+  <tr class="required">
+    <td><%= f.label :total_amount, t(:total_amount) %></td>
+    <td><%= f.number_field :total_amount, step: 100, placeholder: 'should be a multiple of 100', required: true %></td>
+  </tr>
+    <tr class="required">
+      <td><%= f.label :images_attributes_0_attachment, t(:images) %></td>
+      <td>
+        <%= f.fields_for :images do |image_form| %>
+          <%= image_tag(image_form.object.attachment.url(:medium)) %>
+          <%= image_form.file_field :attachment %>
+          <%= image_form.hidden_field(:attachable_subtype, { value: 'image' }) %>
+        <% end %>
+        <%= link_to t(:add_more), 'javascript:', class: 'upload' %>
+      </td>
+    </tr>
+    <tr class="required">
+      <td><%= f.label :documents_attributes_0_attachment, t(:legal_documents) %></td>
+      <td>
+        <%= f.fields_for :documents do |document_form| %>
+          <%= document_form.object.attachment_file_name %>
+          <%= document_form.file_field :attachment %>
+          <%= document_form.hidden_field(:attachable_subtype, { value: 'document' }) %>
+        <% end %>
+        <%= link_to t(:add_more), 'javascript:', class: 'upload' %>
+      </td>
+    </tr>
+  <tr>
+    <td><%= f.label :video_link, t(:video_link) %></td>
+    <td><%= f.url_field :video_link %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :user_minimum_contribution, t(:user_minimum_contribution) %></td>
+    <td><%= f.text_field :user_minimum_contribution, readonly: true, placeholder: 'Total Amount / 10' %></td>
+  </tr>
+</table>

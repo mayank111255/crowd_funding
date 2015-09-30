@@ -1,0 +1,13 @@
+<% content_for :title, 'Crowd Funding' %>
+<% cache name_projects_cache, expires_in: 30.minutes do %>
+
+  <h3 align="center"> <%= t(:maximum_completed_projects) %> </h3>
+  <%= render partial: 'default_listing', locals: { projects: @maximum_completed_projects, url: catagory_projects_url("maximum_completed") } %>
+
+  <h3 align="center"> <%= t(:recently_created_projects) %> </h3>
+  <%= render partial: 'default_listing', locals: { projects: @recently_created_projects, url: catagory_projects_url("recently_created") } %>
+
+  <h3 align="center"> <%= t(:fully_completed_projects) %> </h3>
+  <%= render partial: 'default_listing', locals: { projects: @fully_completed_projects, url: catagory_projects_url("fully_completed") } %>
+  
+<% end %>
