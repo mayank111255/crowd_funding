@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+#FIXME_T No need to specify type: :model
+#FIXME_T Indentation Issues
+
 describe User, :type => :model do
 
   let(:user){ build(:user) }
@@ -11,10 +14,12 @@ describe User, :type => :model do
                       }
 
   describe 'constants' do
+    #FIXME_T Also check User has DEFAULT_DOCUMENTS_COUNT constant or not
     it { expect(User::DEFAULT_DOCUMENTS_COUNT).to eq(3) }
   end
 
   describe "Associations" do
+    #FIXME_T Test case for dependent destroy missing for profile
     it { is_expected.to have_one(:profile) }
     it { is_expected.to have_many(:documents).dependent(:destroy) }
     it { is_expected.to have_many(:projects).dependent(:destroy) }
@@ -29,9 +34,12 @@ describe User, :type => :model do
   end
 
   describe "Attachments" do
+    #FIXME_T Use new syntax avoid using 'should' use 'expect'
+    #FIXME_T Test cases for it's styles and other options missing
     it { should have_attached_file(:image) }
 
     context "validations" do
+      #FIXME_T Use new syntax avoid using 'should' use 'expect'
       it { should validate_attachment_content_type(:image).allowing('image/jpeg') }
     end
   end
