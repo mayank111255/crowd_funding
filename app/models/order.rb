@@ -3,12 +3,6 @@ class Order < ActiveRecord::Base
   attr_accessor :name
   validates :status, presence: true
 
-  scope :test, where(id: 1) do |arg2|
-    def nested_test
-      p arg2
-    end
-  end
-
   before_validation :b4_v
   before_create :b4_c
   before_save :b4_s
