@@ -2,7 +2,7 @@ module HomeHelper
 
   def generate_load_more_button
     offset = params[:offset] ? params[:offset].to_i + 1 : 2
-    button_to 'Load More', :root, data: { 'disable-with': 'Loading..' }, class: 'load', filter: params[:filter], offset: offset, form: { :class => 'button' }
+    button_to 'Load More', :root, data: { disable_with: 'Loading..' }, class: 'load', filter: params[:filter], offset: offset, form: { :class => 'button' }
   end
 
   def name_projects_cache

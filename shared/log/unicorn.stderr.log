@@ -1,0 +1,11 @@
+I, [2016-02-04T17:52:15.444735 #18916]  INFO -- : listening on addr=/Users/mayankagg/Desktop/rails/crowd_funding/shared/sockets/unicorn.sock fd=11
+I, [2016-02-04T17:52:15.444833 #18916]  INFO -- : worker=0 spawning...
+I, [2016-02-04T17:52:15.446241 #18916]  INFO -- : worker=1 spawning...
+I, [2016-02-04T17:52:15.446761 #18916]  INFO -- : master process ready
+I, [2016-02-04T17:52:15.447262 #18917]  INFO -- : worker=0 spawned pid=18917
+I, [2016-02-04T17:52:15.447603 #18917]  INFO -- : worker=0 ready
+I, [2016-02-04T17:52:15.447762 #18918]  INFO -- : worker=1 spawned pid=18918
+I, [2016-02-04T17:52:15.448042 #18918]  INFO -- : worker=1 ready
+I, [2016-02-04T17:53:19.556825 #18916]  INFO -- : reaped #<Process::Status: pid 18918 exit 0> worker=1
+I, [2016-02-04T17:53:19.556990 #18916]  INFO -- : reaped #<Process::Status: pid 18917 exit 0> worker=0
+I, [2016-02-04T17:53:19.558787 #18916]  INFO -- : master complete

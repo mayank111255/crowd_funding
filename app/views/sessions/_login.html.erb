@@ -10,9 +10,9 @@
       <%= label_tag :password %><br>
       <%= password_field_tag :password, params[:password], required: true %>
     </div><br>
-    <%= submit_tag "Login", data: { 'disable-with': 'Processing..' } %>
+    <%= submit_tag "Login", data: { disable_with: 'Processing..' } %>
   <% end %>
   <%= form_tag(:new_password, method: :get, class: "inline_form") do %>
-    <%= submit_tag "forgot password?", data: { 'disable-with': 'Processing..' } %>
+    <%= submit_tag "forgot password?", data: { disable_with: 'Processing..' } %>
   <% end %>
 </div>
