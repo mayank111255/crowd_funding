@@ -3,7 +3,6 @@
 !/log/.keep
 /tmp
 /db/schema.rb
-/config/database.yml
 /public
 /vendor
 /config/local_env.yml
