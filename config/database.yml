@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: crowd_funding_production
-  username: crowd_funding
-  password: <%= ENV['crowd_funding_DATABASE_PASSWORD'] %>
+  username: root
+  password: vinsol@1234
+  socket: /var/run/mysqld/mysqld.sock
