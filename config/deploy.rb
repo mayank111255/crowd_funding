@@ -10,6 +10,7 @@ set :repo_url, 'git@github.com:mayank111255/crowd_funding.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '~/crowd_funding'
 
+set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 # Default value for :scm is :git
 # set :scm, :git
 

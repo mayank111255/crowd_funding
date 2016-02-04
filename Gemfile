@@ -44,6 +44,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 # Use Capistrano for deployment
 gem 'capistrano', group: :development
 gem 'capistrano-rails', group: :development
+gem 'capistrano-rvm', group: :development
 group :development, :test do
   gem 'rspec-rails', '~>3.0'
   gem 'shoulda-matchers'
