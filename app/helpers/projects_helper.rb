@@ -19,7 +19,7 @@ module ProjectsHelper
 
   def add_edit_button
     if user_authorized_for_edit?
-      concat link_to 'Edit Project', edit_project_url(current_project), data: { 'disable-with': 'Processing..' }, class: "btn btn-primary"
+      concat link_to 'Edit Project', edit_project_url(current_project), data: { disable_with: 'Processing..' }, class: "btn btn-primary"
     end
   end
 
@@ -37,7 +37,7 @@ module ProjectsHelper
   def insert_delete_image(comment)
     if admin?
       link_to(image_tag("delete-icon", size: '10x10', class: 'delete_image'), comment_url(comment), method: :DELETE,
-              data: { 'disable-with': 'Loading..' }, class: 'delete_comment')
+              data: { disable_with: 'Loading..' }, class: 'delete_comment')
     end
   end
 
