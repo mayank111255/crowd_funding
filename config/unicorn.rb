@@ -1,15 +1,14 @@
-if (Rails.env.eql?('production'))
-  working_directory "/home/mayank/crowd_funding/current/"
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
+working_directory app_dir
 
-  pid "/home/mayank/crowd_funding/current/pids/unicorn.pid"
+worker_processes 2
+preload_app true
+timeout 30
 
-  stderr_path "/home/mayank/crowd_funding/current/log/unicorn.log"
-  stdout_path "/home/mayank/crowd_funding/current/log/unicorn.log"
+listen "#{shared_dir}/sockets/unicorn.sock", :backlog => 64
 
-  listen "/tmp/unicorn.[crowd_funding].sock"
-  listen "/tmp/unicorn.myapp.sock"
+stderr_path "#{shared_dir}/log/unicorn.stderr.log"
+stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 
-  worker_processes 2
-
-  timeout 30
-end
+pid "#{shared_dir}/pids/unicorn.pid"
